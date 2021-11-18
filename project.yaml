@@ -5,9 +5,8 @@ repository: "https://github.com/subquery/subql-starter"
 schema: "./schema.graphql"
 
 network:
-  endpoint: "wss://polkadot.api.onfinality.io/public-ws"
-  # Optionally provide the HTTP endpoint of a full chain dictionary to speed up processing
-  dictionary: "https://api.subquery.network/sq/subquery/dictionary-polkadot"
+  genesisHash: '0xa9d0b01b4eda83e41246b375a2a759e32124ff1496ef55b831e6dd8b797d1caa'
+  endpoint: wss://cn3.dev.ad3.app:8443
 
 dataSources:
   - name: main
@@ -17,11 +16,11 @@ dataSources:
       handlers:
         - handler: handleBlock
           kind: substrate/BlockHandler
-        - handler: handleEvent
+        - handler: handleDidAssigned
           kind: substrate/EventHandler
           filter: #Filter is optional
-            module: balances
-            method: Deposit
+            module: did
+            method: Register
         - handler: handleCall
           kind: substrate/CallHandler
 
